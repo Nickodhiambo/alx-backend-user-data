@@ -3,6 +3,7 @@
 This module contains the authentication blueprint"""
 from flask import request
 from typing import List, TypeVar
+import os
 
 
 class Auth():
@@ -33,3 +34,10 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         """current_user"""
         return None
+
+    def session_cookie(self, request=None):
+        """Session cooke"""
+        if request is None:
+            return None
+        session_id = os.getenv("SESSION_NAME")
+        return request.cookies.get(session_id)
